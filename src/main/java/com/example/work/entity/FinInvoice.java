@@ -11,7 +11,7 @@ import java.util.Date;
  *
  */
 @Data
-public class FinInvoice {
+public class FinInvoice extends BaseEntity{
     /** 发票ID */
     private Long invoiceId;
 

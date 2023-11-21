@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  *
  */
 @Data
-public class ProjectCost {
+public class ProjectCost extends BaseEntity{
     private Long projectCostId;
 
     /** 项目ID */

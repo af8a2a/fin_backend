@@ -11,7 +11,7 @@ import java.util.Date;
  *
  */
 @Data
-public class FinWages {
+public class FinWages extends BaseEntity{
     /** 工资ID */
     private Long wageId;
 

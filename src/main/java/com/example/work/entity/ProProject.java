@@ -8,7 +8,7 @@ import lombok.Data;
 
  */
 @Data
-public class ProProject {
+public class ProProject extends BaseEntity{
     private Long projectId;
 
     /** 项目编号 */

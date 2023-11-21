@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class FinContract {
+public class FinContract extends BaseEntity{
     /** 合同编号 */
     private Long contractId;
 

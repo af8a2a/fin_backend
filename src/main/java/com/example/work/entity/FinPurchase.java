@@ -9,7 +9,7 @@ import java.util.Date;
  *
  */
 @Data
-public class FinPurchase {
+public class FinPurchase extends BaseEntity{
     Long purchaseId;
     Long projectId;
     Long invoiceId;

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class FinReimburse {
+public class FinReimburse extends BaseEntity{
     /** 主键ID */
     private Long reimburseId;
 

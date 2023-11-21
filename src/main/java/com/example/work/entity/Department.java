@@ -3,7 +3,7 @@ package com.example.work.entity;
 import lombok.Data;
 
 @Data
-public class Department {
+public class Department extends BaseEntity{
     /** 部门ID */
     private Long deptId;
 
