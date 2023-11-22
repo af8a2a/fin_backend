@@ -5,7 +5,15 @@ import com.example.work.entity.FinContract;
 
 import java.util.List;
 
-public interface IFinContractService extends IService<FinContract> {
+
+/**
+ * 合同管理Service接口
+ *
+ * @author horou
+ * @date 2022-03-08
+ */
+public interface IFinContractService
+{
     /**
      * 查询合同管理
      *
@@ -36,7 +44,7 @@ public interface IFinContractService extends IService<FinContract> {
      * @param finContract 合同信息
      * @return 结果
      */
-    public Boolean checkFnContractNumberUnique(FinContract finContract);
+    public String checkFnContractNumberUnique(FinContract finContract);
 
     /**
      * 新增合同管理
