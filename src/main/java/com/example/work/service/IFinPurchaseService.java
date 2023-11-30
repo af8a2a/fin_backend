@@ -1,10 +1,12 @@
 package com.example.work.service;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.work.entity.FinPurchase;
 
 import java.util.List;
 
-public interface IFinPurchaseService {
+public interface IFinPurchaseService extends IService<FinPurchase> {
     /**
      * 查询采购订单
      *

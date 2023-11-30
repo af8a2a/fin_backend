@@ -1,19 +1,25 @@
 package com.example.work.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.work.entity.FinInvoice;
+import com.example.work.entity.FinPurchase;
 import com.example.work.entity.FinReimburse;
 import com.example.work.mapper.FinInvoiceMapper;
+import com.example.work.mapper.FinPurchaseMapper;
 import com.example.work.mapper.FinReimburseMapper;
+import com.example.work.service.IFinPurchaseService;
 import com.example.work.service.IFinReimburseService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 @Service
-public class FinReimburseServiceImpl implements IFinReimburseService {
+public class FinReimburseServiceImpl extends ServiceImpl<FinReimburseMapper, FinReimburse> implements IFinReimburseService {
     @Resource
     private FinReimburseMapper finReimburseMapper;
     @Resource
@@ -28,7 +34,7 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     @Override
     public FinReimburse selectFinReimburseByReimburseId(Long reimburseId)
     {
-        return finReimburseMapper.selectFinReimburseByReimburseId(reimburseId);
+        return finReimburseMapper.selectById(reimburseId);
     }
 
     /**
@@ -40,7 +46,12 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     @Override
     public List<FinReimburse> selectFinReimburseList(FinReimburse finReimburse)
     {
-        List<FinReimburse> finReimburseList = finReimburseMapper.selectFinReimburseList(finReimburse);
+        QueryWrapper<FinReimburse> wrapper=new QueryWrapper<>();
+        wrapper.lambda()
+                .eq(!finReimburse.getReimburseNumber().isEmpty(),FinReimburse::getReimburseNumber,finReimburse.getReimburseNumber())
+                .eq(!finReimburse.getReimburseType().isEmpty(),FinReimburse::getReimburseType,finReimburse.getReimburseType())
+                .eq(!finReimburse.getStatus().isEmpty(),FinReimburse::getStatus,finReimburse.getStatus());
+        List<FinReimburse> finReimburseList = finReimburseMapper.selectList(wrapper);
         return finReimburseList;
     }
 
@@ -54,7 +65,7 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     public int insertFinReimburse(FinReimburse finReimburse)
     {
         finReimburse.setCreateTime(new Date());
-        return finReimburseMapper.insertFinReimburse(finReimburse);
+        return finReimburseMapper.insert(finReimburse);
     }
 
     /**
@@ -67,7 +78,7 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     public int updateFinReimburse(FinReimburse finReimburse)
     {
         finReimburse.setUpdateTime(new Date());
-        return finReimburseMapper.updateFinReimburse(finReimburse);
+        return finReimburseMapper.updateById(finReimburse);
     }
 
     /**
@@ -79,7 +90,7 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     @Override
     public int deleteFinReimburseByReimburseIds(Long[] reimburseIds)
     {
-        return finReimburseMapper.deleteFinReimburseByReimburseIds(reimburseIds);
+        return finReimburseMapper.deleteBatchIds(Arrays.stream(reimburseIds).toList());
     }
 
     /**
@@ -91,7 +102,7 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
     @Override
     public int deleteFinReimburseByReimburseId(Long reimburseId)
     {
-        return finReimburseMapper.deleteFinReimburseByReimburseId(reimburseId);
+        return finReimburseMapper.deleteById(reimburseId);
     }
 
     /**
@@ -101,30 +112,9 @@ public class FinReimburseServiceImpl implements IFinReimburseService {
      * @param fileName 文件名字
      * @return 结果
      */
+    @Deprecated
     public int addInvoice(Long reimburseId, String fileName)
     {
-        String realName = fileName.substring(fileName.lastIndexOf("/") + 1);
-        String filePath = null;
-        try {
-            filePath = fileName.substring(0, fileName.lastIndexOf("/") + 1) + java.net.URLEncoder.encode(realName, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        //新增发票信息
-        FinInvoice finInvoice = new FinInvoice();
-        finInvoice.setInvoiceFrom("2");
-        finInvoice.setStatus("3");
-        finInvoiceMapper.insertFinInvoice(finInvoice);
-
-        //更新发票-文件表
-
-        //更新报销信息
-        FinReimburse finReimburse1 = new FinReimburse();
-        finReimburse1.setReimburseId(reimburseId);
-        finReimburse1.setStatus("2");
-        finReimburse1.setInvoiceId(finInvoice.getInvoiceId());
-        return finReimburseMapper.updateFinReimburse(finReimburse1);
-
+        return 0;
     }
 }

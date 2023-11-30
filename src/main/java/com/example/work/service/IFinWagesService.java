@@ -1,10 +1,11 @@
 package com.example.work.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.work.entity.FinWages;
 
 import java.util.List;
 
-public interface IFinWagesService {
+public interface IFinWagesService extends IService<FinWages> {
     /**
      * 查询工资
      *

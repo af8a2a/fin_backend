@@ -1,23 +1,16 @@
 package com.example.work.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class Department extends BaseEntity{
     /** 部门ID */
+    @TableId
     private Long deptId;
-
-    /** 父部门ID */
-    private Long parentId;
-
-    /** 祖级列表 */
-    private String ancestors;
 
     /** 部门名称 */
     private String deptName;
-
-    /** 显示顺序 */
-    private String orderNum;
 
     /** 负责人 */
     private String leader;
@@ -34,6 +27,4 @@ public class Department extends BaseEntity{
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
-    /** 父部门名称 */
-    private String parentName;
 }

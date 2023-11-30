@@ -52,6 +52,4 @@ public class FinWages extends BaseEntity{
     /** 实发工资 */
     private BigDecimal finalWage;
 
-    private Employee emp;
-
 }

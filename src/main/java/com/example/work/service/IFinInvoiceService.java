@@ -1,5 +1,7 @@
 package com.example.work.service;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.work.entity.FinInvoice;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +13,7 @@ import java.util.List;
  * @author horou
  * @date 2022-03-23
  */
-public interface IFinInvoiceService
+public interface IFinInvoiceService extends IService<FinInvoice>
 {
     /**
      * 查询发票

@@ -1,7 +1,10 @@
 package com.example.work.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.work.entity.Department;
 import com.example.work.entity.ProjectCost;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -11,7 +14,7 @@ import java.util.List;
  * @author horou
  * @date 2022-03-19
  */
-public interface IProjectCostService
+public interface IProjectCostService extends IService<ProjectCost>
 {
 
     /**
@@ -20,7 +23,7 @@ public interface IProjectCostService
      * @param projectIds 项目ID
      * @return 结果
      */
-    public int accountProjectCostByProjectIds(Long[] projectIds);
+    public Boolean accountProjectCostByProjectIds(Long[] projectIds);
 
     /**
      * 查询项目成本
@@ -33,10 +36,10 @@ public interface IProjectCostService
     /**
      * 查询项目成本列表
      *
-     * @param projectCost 项目成本
+     * @param projectId 项目ID
      * @return 项目成本集合
      */
-    public List<ProjectCost> selectProjectCostList(ProjectCost projectCost);
+    public List<ProjectCost> selectProjectCostList(Long projectId);
 
     /**
      * 新增项目成本

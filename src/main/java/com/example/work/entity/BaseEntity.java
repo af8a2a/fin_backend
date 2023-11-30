@@ -8,8 +8,6 @@ import java.util.Map;
 
 @Data
 public class BaseEntity {
-    /** 搜索值 */
-    private String searchValue;
 
     /** 创建者 */
     private String createBy;
@@ -24,11 +22,5 @@ public class BaseEntity {
     /** 更新时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-
-    /** 备注 */
-    private String remark;
-
-    /** 请求参数 */
-    private Map<String, Object> params;
 
 }

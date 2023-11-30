@@ -1,10 +1,11 @@
 package com.example.work.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.work.entity.FinReimburse;
 
 import java.util.List;
 
-public interface IFinReimburseService {
+public interface IFinReimburseService extends IService<FinReimburse> {
     /**
      * 查询报销
      *

@@ -15,7 +15,7 @@ public class FinPurchase extends BaseEntity{
     Long invoiceId;
     String purchaseName;
     String purchaseType;
-    Long purchaser;
+    String purchaser;
     String supplier;
     String status;
     Date purchaseDate;
