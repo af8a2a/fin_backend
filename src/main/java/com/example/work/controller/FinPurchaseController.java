@@ -3,6 +3,7 @@ package com.example.work.controller;
 import com.example.work.entity.FinPurchase;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinPurchaseService;
+import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequestMapping("/financial/purchase")
 public class FinPurchaseController
 {
-    @Autowired
+    @Resource
     private IFinPurchaseService finPurchaseService;
 
     /**

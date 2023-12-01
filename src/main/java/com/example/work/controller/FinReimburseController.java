@@ -5,6 +5,7 @@ import com.example.work.entity.FinReimburse;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinInvoiceService;
 import com.example.work.service.IFinReimburseService;
+import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,9 @@ import java.util.List;
 @RequestMapping("/financial/reimburse")
 public class FinReimburseController
 {
-    @Autowired
+    @Resource
     private IFinReimburseService finReimburseService;
 
-    @Autowired
-    private IFinInvoiceService finInvoiceService;
-
-//    @Autowired
-//    private ServerConfig serverConfig;
 
     /**
      * 查询报销列表

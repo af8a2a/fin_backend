@@ -4,6 +4,7 @@ import com.example.work.entity.FinContract;
 import com.example.work.entity.FinInvoice;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinInvoiceService;
+import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ import java.util.List;
 public class FinInvoiceController
 {
 
-    @Autowired
+    @Resource
     private IFinInvoiceService finInvoiceService;
 
 

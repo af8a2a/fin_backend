@@ -3,6 +3,7 @@ package com.example.work.controller;
 import com.example.work.entity.FinWages;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinWagesService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("/financial/wages")
 public class FinWagesController
 {
-    @Autowired
+    @Resource
     private IFinWagesService finWagesService;
 
     /**

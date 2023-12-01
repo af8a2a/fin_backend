@@ -4,6 +4,7 @@ package com.example.work.controller;
 import com.example.work.entity.FinContract;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinContractService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequestMapping("/financial/contract")
 public class FinContractController
 {
-    @Autowired
+    @Resource
     private IFinContractService finContractService;
 
     /**
