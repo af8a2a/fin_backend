@@ -9,9 +9,10 @@ import com.example.work.mapper.EmployeeMapper;
 import com.example.work.service.IDepartmentService;
 import com.example.work.service.IEmployeeService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Department> implements IDepartmentService {
     @Resource
     private DepartmentMapper mapper;

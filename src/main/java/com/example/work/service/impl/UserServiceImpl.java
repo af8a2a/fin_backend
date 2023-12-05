@@ -5,6 +5,9 @@ import com.example.work.entity.User;
 import com.example.work.mapper.UserMapper;
 import com.example.work.service.IUserService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
+
+@Service
 
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Resource

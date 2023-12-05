@@ -43,13 +43,15 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     public List<FinWages> selectFinWagesList(FinWages finWages)
     {
         QueryWrapper<FinWages> wrapper =new QueryWrapper<>();
-        wrapper.lambda()
-                .eq(!finWages.getEmpName().isEmpty(),FinWages::getEmpName,finWages.getEmpName())
-                .eq(!finWages.getEmpCode().isEmpty(),FinWages::getEmpCode,finWages.getEmpCode())
-                .eq(!finWages.getIssuingDate().toString().isEmpty(),FinWages::getIssuingDate,finWages.getIssuingDate());
+        if (finWages != null) {
+            wrapper.lambda()
+                    .eq(finWages.getEmpName()!=null,FinWages::getEmpName,finWages.getEmpName())
+                    .eq(finWages.getEmpCode()!=null,FinWages::getEmpCode,finWages.getEmpCode())
+                    .eq(finWages.getIssuingDate()!=null,FinWages::getIssuingDate,finWages.getIssuingDate());
+        }
 
 
-        return finWagesMapper.selectList(wrapper);
+        return finWagesMapper.selectList(null);
     }
 
     /**

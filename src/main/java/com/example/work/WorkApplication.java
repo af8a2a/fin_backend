@@ -7,7 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.example.work.mapper*")
+@ComponentScan("com.example.work.controller*")
 @ComponentScan("com.example.work.service*")
+
 public class WorkApplication {
 
     public static void main(String[] args) {

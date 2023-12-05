@@ -7,9 +7,11 @@ import com.example.work.entity.Employee;
 import com.example.work.mapper.EmployeeMapper;
 import com.example.work.service.IEmployeeService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+@Service
 
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> implements IEmployeeService {
     @Resource

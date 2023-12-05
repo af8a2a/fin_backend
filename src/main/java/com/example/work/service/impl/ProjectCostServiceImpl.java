@@ -11,10 +11,12 @@ import com.example.work.mapper.ProjectMapper;
 import com.example.work.service.IEmployeeService;
 import com.example.work.service.IProjectCostService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+@Service
 
 public class ProjectCostServiceImpl extends ServiceImpl<ProjectCostMapper, ProjectCost> implements IProjectCostService {
     @Resource

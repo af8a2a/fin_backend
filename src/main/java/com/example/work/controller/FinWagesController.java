@@ -16,6 +16,7 @@ import java.util.List;
  * @date 2022-03-18
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/financial/wages")
 public class FinWagesController
 {
@@ -30,7 +31,6 @@ public class FinWagesController
     {
         Response<FinWages> response=new Response<>();
         response.setList(finWagesService.selectFinWagesList(finWages));
-        List<FinWages> list = finWagesService.selectFinWagesList(finWages);
         return response;
     }
 
