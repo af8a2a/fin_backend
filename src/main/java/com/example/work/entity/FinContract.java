@@ -1,5 +1,8 @@
 package com.example.work.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -7,8 +10,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
+@TableName("contract")
 public class FinContract extends BaseEntity{
     /** 合同编号 */
+    @TableId(type = IdType.AUTO)
+
     private Long contractId;
 
     /** 合同名称 */

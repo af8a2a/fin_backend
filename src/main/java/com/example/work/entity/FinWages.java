@@ -1,5 +1,8 @@
 package com.example.work.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -11,8 +14,11 @@ import java.util.Date;
  *
  */
 @Data
+@TableName("wage")
 public class FinWages extends BaseEntity{
     /** 工资ID */
+    @TableId(type = IdType.AUTO)
+
     private Long wageId;
 
     /** 员工ID */

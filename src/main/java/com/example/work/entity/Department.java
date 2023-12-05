@@ -1,12 +1,15 @@
 package com.example.work.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("department")
 public class Department extends BaseEntity{
     /** 部门ID */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long deptId;
 
     /** 部门名称 */

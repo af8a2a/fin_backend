@@ -27,7 +27,8 @@ public class FinWagesController
      * 查询工资列表
      */
     @GetMapping("/list")
-    public Response<FinWages> list(FinWages finWages)
+
+    public Response<FinWages> list(@RequestBody FinWages finWages)
     {
         Response<FinWages> response=new Response<>();
         response.setList(finWagesService.selectFinWagesList(finWages));

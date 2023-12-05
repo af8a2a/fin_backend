@@ -51,7 +51,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
         }
 
 
-        return finWagesMapper.selectList(null);
+        return finWagesMapper.selectList(wrapper);
     }
 
     /**
