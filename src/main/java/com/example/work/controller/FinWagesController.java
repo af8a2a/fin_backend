@@ -28,7 +28,7 @@ public class FinWagesController
      */
     @GetMapping("/list")
 
-    public Response<FinWages> list(@RequestBody FinWages finWages)
+    public Response<FinWages> list(FinWages finWages)
     {
         Response<FinWages> response=new Response<>();
         response.setList(finWagesService.selectFinWagesList(finWages));
