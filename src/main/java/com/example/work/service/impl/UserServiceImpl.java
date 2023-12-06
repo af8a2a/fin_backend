@@ -13,16 +13,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Resource
     private UserMapper mapper;
     @Override
-    public String Login(User user) {
+    public int Login(User user) {
         User selected=mapper.selectById(user.getUserId());
         if(selected!=null&&selected.getPassword().equals(user.getPassword())){
-            return "success";
+            return 1;
         }
-        return "error";
+        return 0;
     }
 
     @Override
-    public String Register(User user) {
-        return null;
+    public int Register(User user) {
+        if(user.getCompany()==null||user.getUsername()==null||user.getPassword()==null){
+            return 0;
+        }else{
+            save(user);
+        }
+        return 1;
     }
 }
