@@ -2,14 +2,10 @@ package com.example.work.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.work.entity.FinReimburse;
 import com.example.work.entity.FinWages;
-import com.example.work.mapper.FinReimburseMapper;
 import com.example.work.mapper.FinWagesMapper;
-import com.example.work.service.IFinReimburseService;
 import com.example.work.service.IFinWagesService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

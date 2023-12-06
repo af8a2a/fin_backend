@@ -38,7 +38,6 @@ public class TransactionController {
         Response<Transaction> response=new Response<>();
         finContractService.addTransaction(transaction);
         return response;
-
     }
 
 }
