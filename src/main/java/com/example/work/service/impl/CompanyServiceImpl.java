@@ -6,9 +6,10 @@ import com.example.work.entity.Company;
 import com.example.work.mapper.CompanyMapper;
 import com.example.work.service.ICompanyService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> implements ICompanyService {
     @Resource
     private CompanyMapper mapper;
