@@ -20,8 +20,8 @@ public class TransactionController {
     @Resource
     private ITransactionService service;
 
-    @GetMapping("/list")
-    public Response<Transaction> list(Transaction transaction) {
+    @PostMapping("/list")
+    public Response<Transaction> list(@RequestBody Transaction transaction) {
         Response response = new Response();
         List<Transaction> list = service.getTransaction(transaction);
         response.setList(list);

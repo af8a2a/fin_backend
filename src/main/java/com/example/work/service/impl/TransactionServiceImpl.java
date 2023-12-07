@@ -15,6 +15,7 @@ import java.util.*;
 public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Transaction> implements ITransactionService {
     @Resource
     private TransactionMapper mapper;
+
     @Override
     public int addTransaction(Transaction transaction) {
         save(transaction);
@@ -23,17 +24,17 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
 
     @Override
     public List<Transaction> getTransaction(Transaction transaction) {
-        QueryWrapper<Transaction> wrapper=new QueryWrapper<>();
-
-        if(transaction.getDate()!=null){
-            Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        QueryWrapper<Transaction> wrapper = new QueryWrapper<>();
+        if (transaction.getDate() != null) {
             calendar.setTime(transaction.getDate());
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH) + 1; // 月份从0开始，需要加1
+            wrapper.apply("YEAR(date)={0}",year);
+        }
+        System.out.println("Reach");
+        if (transaction.getType() != null) {
 
-            wrapper.apply("YEAR(date) = {0}", year)
-                    .apply("MONTH(date) = {0}", month);
-
+            wrapper.lambda().eq(Transaction::getType, transaction.getType());
         }
         return mapper.selectList(wrapper);
     }
@@ -61,8 +62,8 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
 
         QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("MONTH(date) as month", "SUM(incoming) as totalIncoming")
-                .ge("date",getFirstDayOfYear(year))
-                .lt("date",getFirstDayOfYear(year + 1))
+                .ge("date", getFirstDayOfYear(year))
+                .lt("date", getFirstDayOfYear(year + 1))
                 .groupBy("MONTH(date)");
 
         List<Map<String, Object>> resultMaps = mapper.selectMaps(queryWrapper);
@@ -73,19 +74,20 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
         for (Map<String, Object> map : resultMaps) {
             Integer month = (Integer) map.get("month");
             BigDecimal totalIncoming = (BigDecimal) map.get("totalIncoming");
-            monthlyIncomingMap.put(month.toString(),totalIncoming);
+            monthlyIncomingMap.put(month.toString(), totalIncoming);
         }
         resultMaps.clear();
-        for (Integer i=1;i<=12;i++) {
-            Map<String, Object> map=new HashMap<>();
-            map.put("month",i.toString());
-            map.put("incoming",monthlyIncomingMap.get(i.toString()));
+        for (Integer i = 1; i <= 12; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("month", i.toString());
+            map.put("incoming", monthlyIncomingMap.get(i.toString()));
             resultMaps.add(map);
         }
         return resultMaps;
 
 
     }
+
     private Date getFirstDayOfYear(int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
@@ -97,7 +99,6 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
     }
-
 
 
 }
