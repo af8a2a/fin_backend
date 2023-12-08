@@ -34,7 +34,6 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
             int year = calendar.get(Calendar.YEAR);
             wrapper.apply("YEAR(date)={0}",year);
         }
-        System.out.println("Reach");
         if (transaction.getType() != null) {
 
             wrapper.lambda().eq(Transaction::getType, transaction.getType());

@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.work.entity.FinWages;
 import com.example.work.mapper.FinWagesMapper;
 import com.example.work.service.IFinWagesService;
+import com.example.work.util.Helper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,15 +41,13 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     public List<FinWages> selectFinWagesList(FinWages finWages)
     {
         QueryWrapper<FinWages> wrapper =new QueryWrapper<>();
-        if (finWages != null) {
-            wrapper.lambda()
-                    .eq(finWages.getEmpName()!=null,FinWages::getEmpName,finWages.getEmpName())
-                    .eq(finWages.getEmpCode()!=null,FinWages::getEmpCode,finWages.getEmpCode())
-                    .eq(finWages.getCompany()!=null,FinWages::getCompany,finWages.getCompany())
-                    .eq(finWages.getIssuingDate()!=null,FinWages::getIssuingDate,finWages.getIssuingDate());
-        }
-
-
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(finWages.getDate());
+        int year = calendar.get(Calendar.YEAR);
+        wrapper.lambda()
+                .apply("YEAR(date)={0}",year)
+                .eq(FinWages::getName,finWages.getName())
+                .eq(FinWages::getCompany,finWages.getCompany());
         return finWagesMapper.selectList(wrapper);
     }
 
@@ -60,8 +60,9 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     @Override
     public int insertFinWages(FinWages finWages)
     {
-        finWages.setIssuingDate(new Date());
-        return finWagesMapper.insert(finWages);
+        finWages.setDate(new Date());
+        save(finWages);
+        return 1;
     }
 
     /**
@@ -73,7 +74,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     @Override
     public int updateFinWages(FinWages finWages)
     {
-        finWages.setIssuingDate(new Date());
+        finWages.setDate(new Date());
         return finWagesMapper.updateById(finWages);
     }
 

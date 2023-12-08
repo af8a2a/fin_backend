@@ -26,25 +26,16 @@ public class FinWagesController
     /**
      * 查询工资列表
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
 
-    public Response<FinWages> list(FinWages finWages)
+    public Response<FinWages> list(@RequestBody FinWages finWages)
     {
         Response<FinWages> response=new Response<>();
         response.setList(finWagesService.selectFinWagesList(finWages));
         return response;
     }
 
-    /**
-     * 导出工资列表
-     */
-//    @PostMapping("/export")
-//    public void export(HttpServletResponse response, FinWages finWages)
-//    {
-//        List<FinWages> list = finWagesService.selectFinWagesList(finWages);
-//        ExcelUtil<FinWages> util = new ExcelUtil<FinWages>(FinWages.class);
-//        util.exportExcel(response, list, "工资数据");
-//    }
+
 
     /**
      * 获取工资详细信息
@@ -61,7 +52,7 @@ public class FinWagesController
     /**
      * 新增工资
      */
-    @PostMapping
+    @PostMapping("/add")
     public Response<FinWages> add(@RequestBody FinWages finWages)
     {
         Response<FinWages> response=new Response<>();
