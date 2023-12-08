@@ -1,11 +1,14 @@
 package com.example.work.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.work.entity.User;
 import com.example.work.mapper.UserMapper;
 import com.example.work.service.IUserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 
@@ -14,8 +17,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper mapper;
     @Override
     public int Login(User user) {
-        User selected=mapper.selectById(user.getUserId());
-        if(selected!=null&&selected.getPassword().equals(user.getPassword())){
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        wrapper.lambda()
+                .eq(User::getUsername,user.getUsername())
+                .eq(User::getPassword,user.getPassword())
+                .eq(User::getCompany,user.getCompany());
+        List<User> selected=mapper.selectList(wrapper);
+        if(!selected.isEmpty()){
             return 1;
         }
         return 0;
