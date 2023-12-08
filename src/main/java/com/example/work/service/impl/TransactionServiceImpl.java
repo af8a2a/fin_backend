@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.*;
 
+
 @Service
 public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Transaction> implements ITransactionService {
     @Resource
@@ -18,6 +19,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
 
     @Override
     public int addTransaction(Transaction transaction) {
+        transaction.setDate(new Date());
         save(transaction);
         return 1;
     }
@@ -26,6 +28,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
     public List<Transaction> getTransaction(Transaction transaction) {
         Calendar calendar = Calendar.getInstance();
         QueryWrapper<Transaction> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Transaction::getCompany,transaction.getCompany());
         if (transaction.getDate() != null) {
             calendar.setTime(transaction.getDate());
             int year = calendar.get(Calendar.YEAR);
@@ -49,8 +52,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
     public List<Map<String, Object>> analysis() {
         QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("name", "SUM(incoming) as value").groupBy("name");
-        List<Map<String, Object>> result = mapper.selectMaps(queryWrapper);
-        return result;
+        return mapper.selectMaps(queryWrapper);
     }
 
     @Override
@@ -81,6 +83,8 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
             Map<String, Object> map = new HashMap<>();
             map.put("month", i.toString());
             map.put("incoming", monthlyIncomingMap.get(i.toString()));
+            map.put("tax", 0);
+
             resultMaps.add(map);
         }
         return resultMaps;

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @TableName("transaction")
@@ -20,4 +20,5 @@ public class Transaction {
     String name;
     String type;
     Date date;
+    String company;
 }

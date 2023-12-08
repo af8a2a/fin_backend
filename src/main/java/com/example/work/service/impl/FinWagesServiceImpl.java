@@ -43,6 +43,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
             wrapper.lambda()
                     .eq(finWages.getEmpName()!=null,FinWages::getEmpName,finWages.getEmpName())
                     .eq(finWages.getEmpCode()!=null,FinWages::getEmpCode,finWages.getEmpCode())
+                    .eq(finWages.getCompany()!=null,FinWages::getCompany,finWages.getCompany())
                     .eq(finWages.getIssuingDate()!=null,FinWages::getIssuingDate,finWages.getIssuingDate());
         }
 
@@ -59,7 +60,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     @Override
     public int insertFinWages(FinWages finWages)
     {
-        finWages.setCreateTime(new Date());
+        finWages.setIssuingDate(new Date());
         return finWagesMapper.insert(finWages);
     }
 
@@ -72,7 +73,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     @Override
     public int updateFinWages(FinWages finWages)
     {
-        finWages.setUpdateTime(new Date());
+        finWages.setIssuingDate(new Date());
         return finWagesMapper.updateById(finWages);
     }
 

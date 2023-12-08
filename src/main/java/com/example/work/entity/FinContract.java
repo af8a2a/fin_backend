@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @TableName("contract")
-public class FinContract extends BaseEntity{
+public class FinContract {
     /** 合同编号 */
     @TableId(type = IdType.AUTO)
 
