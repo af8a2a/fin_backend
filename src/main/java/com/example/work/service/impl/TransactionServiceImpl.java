@@ -28,16 +28,14 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
     public List<Transaction> getTransaction(Transaction transaction) {
         Calendar calendar = Calendar.getInstance();
         QueryWrapper<Transaction> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(Transaction::getCompany,transaction.getCompany());
-        if (transaction.getDate() != null) {
             calendar.setTime(transaction.getDate());
             int year = calendar.get(Calendar.YEAR);
-            wrapper.apply("YEAR(date)={0}",year);
-        }
-        if (transaction.getType() != null) {
-
-            wrapper.lambda().eq(Transaction::getType, transaction.getType());
-        }
+            int month=calendar.get(Calendar.MONTH);
+        wrapper.lambda().eq(Transaction::getCompany,transaction.getCompany())
+                .eq(Transaction::getType, transaction.getType())
+                .apply("YEAR(date)={0}",year)
+                .apply("MONTH(date)={0}",month+1);
+        System.out.println(month);
         return mapper.selectList(wrapper);
     }
 
