@@ -26,8 +26,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 工资
      */
     @Override
-    public FinWages selectFinWagesByWageId(Long wageId)
-    {
+    public FinWages selectFinWagesByWageId(Long wageId) {
         return finWagesMapper.selectById(wageId);
     }
 
@@ -38,16 +37,18 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 工资
      */
     @Override
-    public List<FinWages> selectFinWagesList(FinWages finWages)
-    {
-        QueryWrapper<FinWages> wrapper =new QueryWrapper<>();
+    public List<FinWages> selectFinWagesList(FinWages finWages) {
+        QueryWrapper<FinWages> wrapper = new QueryWrapper<>();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(finWages.getDate());
         int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+
         wrapper.lambda()
-                .apply("YEAR(date)={0}",year)
-                .eq(FinWages::getName,finWages.getName())
-                .eq(FinWages::getCompany,finWages.getCompany());
+                .apply("YEAR(date)={0}", year)
+                .apply("MONTH(date)={0}", month + 1)
+                .eq(FinWages::getName, finWages.getName())
+                .eq(FinWages::getCompany, finWages.getCompany());
         return finWagesMapper.selectList(wrapper);
     }
 
@@ -58,8 +59,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 结果
      */
     @Override
-    public int insertFinWages(FinWages finWages)
-    {
+    public int insertFinWages(FinWages finWages) {
         finWages.setDate(new Date());
         save(finWages);
         return 1;
@@ -72,8 +72,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 结果
      */
     @Override
-    public int updateFinWages(FinWages finWages)
-    {
+    public int updateFinWages(FinWages finWages) {
         finWages.setDate(new Date());
         return finWagesMapper.updateById(finWages);
     }
@@ -85,8 +84,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 结果
      */
     @Override
-    public int deleteFinWagesByWageIds(Long[] wageIds)
-    {
+    public int deleteFinWagesByWageIds(Long[] wageIds) {
         return finWagesMapper.deleteBatchIds(Arrays.stream(wageIds).toList());
     }
 
@@ -97,8 +95,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 结果
      */
     @Override
-    public int deleteFinWagesByWageId(Long wageId)
-    {
+    public int deleteFinWagesByWageId(Long wageId) {
         return finWagesMapper.deleteById(wageId);
     }
 }
