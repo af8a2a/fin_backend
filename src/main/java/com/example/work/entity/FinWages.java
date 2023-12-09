@@ -18,7 +18,7 @@ public class FinWages {
     /** 工资ID */
     @TableId(type = IdType.AUTO)
 
-    private Long wageId;
+    private Integer wageId;
 
     /** 员工姓名 */
     private String name;

@@ -3,7 +3,9 @@ package com.example.work.controller;
 import com.example.work.entity.FinWages;
 import com.example.work.entity.Response;
 import com.example.work.service.IFinWagesService;
+import io.swagger.models.auth.In;
 import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,17 +39,7 @@ public class FinWagesController
 
 
 
-    /**
-     * 获取工资详细信息
-     */
-    @GetMapping(value = "/{wageId}")
-    public Response<FinWages> getInfo(@PathVariable("wageId") Long wageId)
-    {
-        Response<FinWages> response=new Response<>();
-        response.getList().add(finWagesService.selectFinWagesByWageId(wageId));
-        return response;
 
-    }
 
     /**
      * 新增工资
@@ -80,12 +72,12 @@ public class FinWagesController
     /**
      * 删除工资
      */
-	@DeleteMapping("/{wageIds}")
-    public Response<FinWages> remove(@PathVariable Long[] wageIds)
+	@PostMapping("/delete")
+    public Response<FinWages> remove(@RequestBody FinWages finWage)
     {
         Response<FinWages> response=new Response<>();
 
-        if(finWagesService.deleteFinWagesByWageIds(wageIds)!=0){
+        if(finWagesService.deleteFinWagesByWageId(finWage.getWageId())!=0){
             response.setMessage("success");
         }
         return response;

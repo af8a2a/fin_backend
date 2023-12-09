@@ -52,5 +52,5 @@ public interface IFinWagesService extends IService<FinWages> {
      * @param wageId 工资主键
      * @return 结果
      */
-    public int deleteFinWagesByWageId(Long wageId);
+    public int deleteFinWagesByWageId(Integer wageId);
 }

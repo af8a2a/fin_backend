@@ -47,7 +47,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
         wrapper.lambda()
                 .apply("YEAR(date)={0}", year)
                 .apply("MONTH(date)={0}", month + 1)
-                .eq(FinWages::getName, finWages.getName())
+                .eq(finWages.getName().isEmpty()==false,FinWages::getName, finWages.getName())
                 .eq(FinWages::getCompany, finWages.getCompany());
         return finWagesMapper.selectList(wrapper);
     }
@@ -95,7 +95,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      * @return 结果
      */
     @Override
-    public int deleteFinWagesByWageId(Long wageId) {
+    public int deleteFinWagesByWageId(Integer wageId) {
         return finWagesMapper.deleteById(wageId);
     }
 }
