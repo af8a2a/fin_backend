@@ -58,7 +58,7 @@ public class FinWagesController
     /**
      * 修改工资
      */
-    @PutMapping
+    @PostMapping("update")
     public Response<FinWages> edit(@RequestBody FinWages finWages)
     {
         Response<FinWages> response=new Response<>();
