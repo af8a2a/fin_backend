@@ -28,13 +28,22 @@ public class TransactionController {
         return response;
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/update")
     public Response<Transaction> edit(@RequestBody Transaction transaction) {
         Response<Transaction> response = new Response<>();
         service.editTransaction(transaction);
         return response;
 
     }
+
+    @PostMapping("/delete")
+    public Response<Transaction> delete(@RequestBody Transaction transaction) {
+        Response<Transaction> response = new Response<>();
+        service.deleteTransactionByID(transaction.getTransactionId());
+        return response;
+
+    }
+
 
     @PostMapping("/add")
     public Response<Transaction> add(@RequestBody Transaction transaction) {

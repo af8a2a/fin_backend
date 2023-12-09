@@ -40,6 +40,11 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
     }
 
     @Override
+    public int deleteTransactionByID(Integer transactionID) {
+        return mapper.deleteById(transactionID);
+    }
+
+    @Override
     public int editTransaction(Transaction transaction) {
         updateById(transaction);
         return 1;

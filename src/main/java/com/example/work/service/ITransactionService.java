@@ -10,7 +10,7 @@ import java.util.Map;
 public interface ITransactionService extends IService<Transaction> {
     int addTransaction(Transaction transaction);
     List<Transaction> getTransaction(Transaction transaction);
-
+    int deleteTransactionByID(Integer transactionID);
     int editTransaction(Transaction transaction);
     List<Map<String,Object>>  analysis();
 
