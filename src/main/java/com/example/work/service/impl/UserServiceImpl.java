@@ -38,4 +38,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         return 1;
     }
+
+    @Override
+    public List<User> search(User user) {
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        if(user.getCompany()!=null){
+            if(!user.getCompany().isEmpty()){
+                wrapper.lambda().eq(User::getCompany,user.getCompany());
+            }
+        }
+        if(user.getUsername()!=null){
+            if(!user.getUsername().isEmpty()){
+                wrapper.lambda().eq(User::getUsername,user.getUsername());
+            }
+        }
+        return mapper.selectList(wrapper);
+    }
+
+    @Override
+    public int Update(User user) {
+        return mapper.updateById(user);
+    }
+
+    @Override
+    public int Delete(User user) {
+        return mapper.deleteById(user.getUserId());
+    }
 }

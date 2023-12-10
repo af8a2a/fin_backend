@@ -31,4 +31,26 @@ public class UserController {
         }
         return response;
     }
+    @PostMapping("/select")
+    public Response<User> search(@RequestBody User user){
+        Response<User> response=new Response<>();
+        response.setList(service.search(user));
+        return response;
+    }
+    @PostMapping("/update")
+    public Response<User> update(@RequestBody User user){
+        Response<User> response=new Response<>();
+        if(service.Update(user)!=0){
+            response.setMessage("success");
+        }
+        return response;
+    }
+    @PostMapping("/delete")
+    public Response<User> delete(@RequestBody User user){
+        Response<User> response=new Response<>();
+        if(service.Delete(user)!=0){
+            response.setMessage("success");
+        }
+        return response;
+    }
 }
