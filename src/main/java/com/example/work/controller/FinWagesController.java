@@ -51,6 +51,8 @@ public class FinWagesController
 
         if(finWagesService.insertFinWages(finWages)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -65,6 +67,8 @@ public class FinWagesController
 
         if(finWagesService.updateFinWages(finWages)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -79,6 +83,8 @@ public class FinWagesController
 
         if(finWagesService.deleteFinWagesByWageId(finWage.getWageId())!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
 

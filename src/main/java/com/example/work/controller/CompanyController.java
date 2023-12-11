@@ -31,6 +31,8 @@ public class CompanyController {
         Response<Company> response=new Response<>();
         if(service.addCompany(company)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -39,6 +41,8 @@ public class CompanyController {
         Response<Company> response=new Response<>();
         if(service.editCompany(company)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -47,6 +51,8 @@ public class CompanyController {
         Response<Company> response=new Response<>();
         if(service.deleteCompany(companyId)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }

@@ -22,7 +22,7 @@ public class TransactionController {
 
     @PostMapping("/list")
     public Response<Transaction> list(@RequestBody Transaction transaction) {
-        Response response = new Response();
+        Response<Transaction> response = new Response();
         List<Transaction> list = service.getTransaction(transaction);
         response.setList(list);
         return response;
@@ -31,7 +31,11 @@ public class TransactionController {
     @PostMapping("/update")
     public Response<Transaction> edit(@RequestBody Transaction transaction) {
         Response<Transaction> response = new Response<>();
-        service.editTransaction(transaction);
+        if(service.editTransaction(transaction)!=0){
+            response.setMessage("success");
+        }else{
+            response.setMessage("fail");
+        }
         return response;
 
     }
@@ -39,7 +43,11 @@ public class TransactionController {
     @PostMapping("/delete")
     public Response<Transaction> delete(@RequestBody Transaction transaction) {
         Response<Transaction> response = new Response<>();
-        service.deleteTransactionByID(transaction.getTransactionId());
+        if(service.deleteTransactionByID(transaction.getTransactionId())!=0){
+            response.setMessage("success");
+        }else{
+            response.setMessage("fail");
+        }
         return response;
 
     }
@@ -48,7 +56,11 @@ public class TransactionController {
     @PostMapping("/add")
     public Response<Transaction> add(@RequestBody Transaction transaction) {
         Response<Transaction> response = new Response<>();
-        service.addTransaction(transaction);
+        if(service.addTransaction(transaction)!=0){
+            response.setMessage("success");
+        }else{
+            response.setMessage("fail");
+        }
         return response;
     }
 

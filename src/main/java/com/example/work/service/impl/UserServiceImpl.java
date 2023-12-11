@@ -1,6 +1,7 @@
 package com.example.work.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.work.entity.User;
 import com.example.work.mapper.UserMapper;
@@ -52,11 +53,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 wrapper.lambda().eq(User::getUsername,user.getUsername());
             }
         }
+        if(user.getPassword()!=null){
+            if(!user.getPassword().isEmpty()){
+                wrapper.lambda().eq(User::getPassword,user.getPassword());
+            }
+        }
         return mapper.selectList(wrapper);
     }
 
     @Override
     public int Update(User user) {
+
         return mapper.updateById(user);
     }
 

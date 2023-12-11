@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80035
 File Encoding         : 65001
 
-Date: 2023-12-09 15:45:53
+Date: 2023-12-11 14:48:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,8 +94,8 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', 'admin', 'admin', 'admin');
-INSERT INTO `user` VALUES ('2', '1', '1', '1', 'guest');
-INSERT INTO `user` VALUES ('3', '2', '2', '2', 'guest');
+INSERT INTO `user` VALUES ('2', '2', '2', '2', 'guest');
+INSERT INTO `user` VALUES ('3', '1', '1', '1', 'guest');
 
 -- ----------------------------
 -- Table structure for wage

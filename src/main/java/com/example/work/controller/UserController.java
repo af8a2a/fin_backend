@@ -16,10 +16,13 @@ public class UserController {
     @Resource
     private IUserService service;
     @PostMapping("/login")
-    public Response<User> login(User user){
+    public Response<User> login(@RequestBody User user){
         Response<User> response=new Response<>();
+
         if(service.Login(user)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -28,6 +31,8 @@ public class UserController {
         Response<User> response=new Response<>();
         if(service.Register(user)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -42,6 +47,8 @@ public class UserController {
         Response<User> response=new Response<>();
         if(service.Update(user)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
@@ -50,6 +57,8 @@ public class UserController {
         Response<User> response=new Response<>();
         if(service.Delete(user)!=0){
             response.setMessage("success");
+        }else{
+            response.setMessage("fail");
         }
         return response;
     }
