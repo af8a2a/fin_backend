@@ -30,4 +30,6 @@ public class FinWages {
     private BigDecimal money;
 
     private String company;
+
+    String status;
 }

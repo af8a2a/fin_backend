@@ -1,15 +1,11 @@
 package com.example.work.controller;
 
-import com.example.work.entity.FinContract;
 import com.example.work.entity.Response;
 import com.example.work.entity.Transaction;
 import com.example.work.service.ITransactionService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.annotation.Resource;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -64,10 +60,10 @@ public class TransactionController {
         return response;
     }
 
-    @GetMapping("/data")
-    public Response<Map<String, Object>> fetch() {
+    @PostMapping("/data")
+    public Response<Map<String, Object>> fetch(@RequestBody Transaction transaction) {
         Response<Map<String, Object>> response = new Response<>();
-        response.setList(service.analysis());
+        response.setList(service.analysis(transaction));
         return response;
     }
     @PostMapping("/sum")

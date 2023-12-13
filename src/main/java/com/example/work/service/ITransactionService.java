@@ -12,7 +12,7 @@ public interface ITransactionService extends IService<Transaction> {
     List<Transaction> getTransaction(Transaction transaction);
     int deleteTransactionByID(Integer transactionID);
     int editTransaction(Transaction transaction);
-    List<Map<String,Object>>  analysis();
+    List<Map<String,Object>>  analysis(Transaction transaction);
 
     List<Map<String, Object>> tax(Date date);
 }

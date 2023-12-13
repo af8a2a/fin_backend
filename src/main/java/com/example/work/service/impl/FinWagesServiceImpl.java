@@ -74,6 +74,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
     @Override
     public int updateFinWages(FinWages finWages) {
         finWages.setDate(new Date());
+        finWages.setStatus("待审批");
         return finWagesMapper.updateById(finWages);
     }
 

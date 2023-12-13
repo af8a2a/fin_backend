@@ -20,6 +20,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
     @Override
     public int addTransaction(Transaction transaction) {
         transaction.setDate(new Date());
+        transaction.setStatus("待审批");
         save(transaction);
         return 1;
     }
@@ -33,6 +34,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
             int month=calendar.get(Calendar.MONTH);
         wrapper.lambda().eq(Transaction::getCompany,transaction.getCompany())
                 .eq(Transaction::getType, transaction.getType())
+                .eq(Transaction::getStatus,"审核通过")
                 .apply("YEAR(date)={0}",year)
                 .apply("MONTH(date)={0}",month+1);
         System.out.println(month);
@@ -46,14 +48,15 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
 
     @Override
     public int editTransaction(Transaction transaction) {
+        transaction.setStatus("待审批");
         updateById(transaction);
         return 1;
     }
 
     @Override
-    public List<Map<String, Object>> analysis() {
+    public List<Map<String, Object>> analysis(Transaction transaction) {
         QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("name", "SUM(incoming) as value").groupBy("name");
+        queryWrapper.select("name", "SUM(incoming) as value").groupBy("name").eq("company",transaction.getCompany());
         return mapper.selectMaps(queryWrapper);
     }
 
@@ -66,6 +69,7 @@ public class TransactionServiceImpl extends ServiceImpl<TransactionMapper, Trans
 
         QueryWrapper<Transaction> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("MONTH(date) as month", "SUM(incoming) as totalIncoming")
+                .eq("status","审核通过")
                 .ge("date", getFirstDayOfYear(year))
                 .lt("date", getFirstDayOfYear(year + 1))
                 .groupBy("MONTH(date)");
