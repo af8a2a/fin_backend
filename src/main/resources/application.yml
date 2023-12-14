@@ -1,6 +1,15 @@
 server:
-  port: 3000
+  port: 8080
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+      base-url: /documentation
+
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   application:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -9,3 +18,8 @@ spring:
     password: 12345qqaa
     resources:
       static-locations=classpath:/static/:
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  try-host: http://127.0.0.1:${server.port}

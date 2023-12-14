@@ -13,10 +13,8 @@ import com.example.work.service.IExamineService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 @Service
 public class ExamineServiceImpl extends ServiceImpl<ExamineMapper, Examine> implements IExamineService {
     @Resource
@@ -38,21 +36,24 @@ public class ExamineServiceImpl extends ServiceImpl<ExamineMapper, Examine> impl
     public List<Map<String, Object>> selectCompany(Examine examine) {
         QueryWrapper<Examine> wrapper=new QueryWrapper<>();
         wrapper.select("examine_company");
-        List<Map<String, Object>> resultMaps = mapper.selectMaps(wrapper);
-        return resultMaps;
+        return mapper.selectMaps(wrapper);
     }
 
     @Override
     public int finishExamine(Examine examine) {
-        if(examine.getType()=="营业审核"){
+        if(Objects.equals(examine.getType(), "营业审核")){
             UpdateWrapper<Transaction> wrapper=new UpdateWrapper<>();
-            wrapper.eq("transaction_id",examine.getCommitId());
+            wrapper.eq("transaction_id",examine.getCommitId())
+                    .set("status","审核通过");;
             Map<String, Object> updateFields = new HashMap<>();
             updateFields.put("status","审核通过");
+
+
             return transactionMapper.update(new Transaction(),wrapper);
-        }else if(examine.getType()=="工资审核"){
+        }else if(Objects.equals(examine.getType(), "工资审核")){
             UpdateWrapper<FinWages> wrapper=new UpdateWrapper<>();
-            wrapper.eq("wage_id",examine.getCommitId());
+            wrapper.eq("wage_id",examine.getCommitId())
+                    .set("status","审核通过");
             Map<String, Object> updateFields = new HashMap<>();
             updateFields.put("status","审核通过");
             return finWagesMapper.update(new FinWages(),wrapper);

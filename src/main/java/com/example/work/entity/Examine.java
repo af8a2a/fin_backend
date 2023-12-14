@@ -19,6 +19,9 @@ public class Examine {
     /** 审核公司 */
     private String examineCompany;
 
+    //操作 新增，修改，删除
+    String operator;
+
     /** 提交审核日期 */
     private Date examineTime;
 

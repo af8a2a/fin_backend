@@ -4,20 +4,20 @@ import com.example.work.entity.Company;
 import com.example.work.entity.FinWages;
 import com.example.work.entity.Response;
 import com.example.work.service.ICompanyService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@CrossOrigin
-@RequestMapping("/financial/company")
+@Api("demo api")
+@RestController
+@RequestMapping("/api")
 
 public class CompanyController {
     @Resource
     private ICompanyService service;
+    @ApiOperation(value = "通过ID获取")
 
     @GetMapping("/list")
     public Response<Company> list(String companyName){
