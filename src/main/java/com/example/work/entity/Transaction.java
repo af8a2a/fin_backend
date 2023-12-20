@@ -22,4 +22,5 @@ public class Transaction {
     Date date;
     String company;
     String status;
+
 }

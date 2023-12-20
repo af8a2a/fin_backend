@@ -1,6 +1,7 @@
 package com.example.work.controller;
 
 import com.example.work.entity.Examine;
+import com.example.work.entity.ExamineDTO;
 import com.example.work.entity.FinWages;
 import com.example.work.entity.Response;
 import com.example.work.service.IExamineService;
@@ -20,7 +21,8 @@ public class ExamineController {
     {
         Response<Examine> response=new Response<>();
         response.setList(service.selectExamineList(examine));
-        if(response.getList().isEmpty()){
+        if(response.getList()==null){
+            response.setMessage("fail");
         }else{
             response.setMessage("success");
         }
@@ -31,7 +33,8 @@ public class ExamineController {
     {
         Response<Map<String, Object>> response=new Response<>();
         response.setList(service.selectCompany(examine));
-        if(response.getList().isEmpty()){
+        if(response.getList()==null){
+            response.setMessage("fail");
         }else{
             response.setMessage("success");
         }
@@ -51,10 +54,14 @@ public class ExamineController {
     }
 
     @PostMapping("/finish")
-    public Response<Examine> finish(@RequestBody Examine examine)
+    public Response<Examine> finish(@RequestBody ExamineDTO examineDTO)
     {
         Response<Examine> response=new Response<>();
-        if(service.finishExamine(examine)!=0){
+        if(examineDTO.getExamineId()==null){
+            response.setMessage("fail");
+            return response;
+        }
+        if(service.finishExamine(examineDTO)!=0){
             response.setMessage("success");
         }else{
             response.setMessage("fail");

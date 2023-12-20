@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 3000
 springfox:
   documentation:
     swagger-ui:
@@ -23,3 +23,12 @@ swagger:
   application-name: ${spring.application.name}
   application-version: 1.0
   try-host: http://127.0.0.1:${server.port}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: "/actuator"
+  endpoint:
+    health:
+      show-details: always

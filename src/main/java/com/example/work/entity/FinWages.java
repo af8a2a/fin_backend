@@ -32,4 +32,5 @@ public class FinWages {
     private String company;
 
     String status;
+
 }

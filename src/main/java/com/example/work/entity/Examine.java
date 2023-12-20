@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -14,13 +15,11 @@ public class Examine {
     //审核主键id
     @TableId(type = IdType.AUTO)
     Integer examineId;
-    //外键id
+
     Integer commitId;
+
     /** 审核公司 */
     private String examineCompany;
-
-    //操作 新增，修改，删除
-    String operator;
 
     /** 提交审核日期 */
     private Date examineTime;
@@ -29,10 +28,6 @@ public class Examine {
     private String type;
 
     //审核金额
-    String money;
+    BigDecimal money;
 
-    /** 审核时间 */
-    private Date passTime;
-
-    String status;
 }

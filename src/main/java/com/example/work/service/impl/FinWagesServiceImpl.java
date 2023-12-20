@@ -2,7 +2,9 @@ package com.example.work.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.work.entity.Examine;
 import com.example.work.entity.FinWages;
+import com.example.work.mapper.ExamineMapper;
 import com.example.work.mapper.FinWagesMapper;
 import com.example.work.service.IFinWagesService;
 import com.example.work.util.Helper;
@@ -18,7 +20,8 @@ import java.util.List;
 public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> implements IFinWagesService {
     @Resource
     private FinWagesMapper finWagesMapper;
-
+    @Resource
+    private ExamineMapper examineMapper;
     /**
      * 查询工资
      *
@@ -48,6 +51,7 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
                 .apply("YEAR(date)={0}", year)
                 .apply("MONTH(date)={0}", month + 1)
                 .eq(finWages.getName().isEmpty()==false,FinWages::getName, finWages.getName())
+                .eq(FinWages::getStatus,"已审核")
                 .eq(FinWages::getCompany, finWages.getCompany());
         return finWagesMapper.selectList(wrapper);
     }
@@ -60,9 +64,16 @@ public class FinWagesServiceImpl extends ServiceImpl<FinWagesMapper, FinWages> i
      */
     @Override
     public int insertFinWages(FinWages finWages) {
-        finWages.setDate(new Date());
-        save(finWages);
-        return 1;
+        Examine examine=new Examine();
+        finWages.setStatus("待审核");
+        finWagesMapper.insert(finWages);
+        examine.setCommitId(finWages.getWageId());
+        examine.setExamineTime(finWages.getDate());
+        examine.setExamineCompany(finWages.getCompany());
+        examine.setType("工资审核");
+        examine.setMoney(finWages.getMoney());
+        return examineMapper.insert(examine);
+
     }
 
     /**

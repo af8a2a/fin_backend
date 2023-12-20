@@ -2,6 +2,7 @@ package com.example.work.controller;
 
 import com.example.work.entity.Response;
 import com.example.work.entity.Transaction;
+import com.example.work.entity.TransactionDTO;
 import com.example.work.service.ITransactionService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -67,9 +68,9 @@ public class TransactionController {
         return response;
     }
     @PostMapping("/sum")
-    public Response<Map<String, Object>> get(@RequestBody Transaction transaction){
+    public Response<Map<String, Object>> get(@RequestBody TransactionDTO dto){
         Response<Map<String, Object>> response = new Response<>();
-        response.setList(service.tax(transaction.getDate()));
+        response.setList(service.tax(dto));
         return response;
 
     }

@@ -2,6 +2,7 @@ package com.example.work.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.work.entity.Transaction;
+import com.example.work.entity.TransactionDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -14,5 +15,5 @@ public interface ITransactionService extends IService<Transaction> {
     int editTransaction(Transaction transaction);
     List<Map<String,Object>>  analysis(Transaction transaction);
 
-    List<Map<String, Object>> tax(Date date);
+    List<Map<String, Object>> tax(TransactionDTO dto);
 }
